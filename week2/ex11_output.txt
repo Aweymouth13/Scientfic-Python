@@ -1,0 +1,4 @@
+# median_imaging median_radial median_transit
+156.500
+0.970
+0.079
