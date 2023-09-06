@@ -1,28 +1,20 @@
 import numpy as np
-"""### 9. NumPy Slicing with Boolean Indexing
 
-Read in file ``spectrum_oct17_adi.dat`` from the notes using ``np.loadtxt``.   It has columns of wavelength, flux density, uncertainty (flux density), and signal-to-noise ratio.   
+a=np.array([[1,2],[3,4]]) #2x2 matrix 1, 2 for row =0 and 3,4 for row =1
+b=np.array([[1,2]]) #a row vector
+b2=np.array([[1],[2]]) #a column vector
+ 
+#
+print(np.dot(a,b2))
+ 
 
- Use the ``np.where`` statement to replace the values for uncertainty (flux density) by ``-9`` for rows where the signal-to-noise ratio is less than 5.
+print(np.dot(b,a))
 
-Save a new file with columns of wavelength, flux density, uncertainty (flux density), and signal-to-noise ratio, where you have updated the uncertainty values."""
+print(np.matmul(a,b2))
 
-#read in file 
-data = np.loadtxt('spectrum_oct17_adi.dat')
-
-#define columns
-wavelength = data[:,0]
-flux_density = data[:,1]
-uncertainty = data[:,2]
-snr = data[:,3]
-
-print(data)
-
-#update uncertainty where snr < 5
-indices = np.where(snr < 5)
-uncertainty[indices] = -9
-
-#save to new document
-new_data = np.column_stack((wavelength, flux_density, uncertainty, snr))
-print(new_data)
-np.savetxt('test', new_data)
+#column vector 3 elements long
+c=np.array([[1],[2],[3]])
+#row vector 2 elements long
+d=np.array([[1,2]])
+#outter product
+print(np.matmul(c,d))

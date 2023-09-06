@@ -1,15 +1,5 @@
 """
 Week 2 Homework Set: Aaron Weymouth, KTX887
-I'm unsure about the 'explaination of how it is run'. I will comment all part of the code that I can
-and give a blub in the readme.txt file. I've also tried to interpret the homework as well as I can!
-
-I'm only taking two classes this semester and my other one is a breeze, I'll be devoting many hours a week
-to this class :)
-
-I am a BI analyst for my job, I use python analytics every day. I am trying to take my knowledge and apply
-it to Physics/Astronomy. I'm always open to feedback on my code!
-
-In some exercises I have used additonal libraries for a challange
 """
 
 ######### You can also access at this link! This is a shared site and will contain all work up-to-date #########
