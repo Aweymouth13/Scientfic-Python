@@ -2,6 +2,7 @@
 ###HW for week 3 and 4
 KTX887
 Aaron Weymouth
+https://app.noteable.io/f/3f1af83b-486a-4122-9257-2dd002f52dd8/Week-3-Assignments.ipynb
 
 """
 
@@ -71,23 +72,23 @@ a=np.array([[1,2.333,-4],[-4,-3,-.001],[-.2,5.3,9.99]])
 det_a = np.linalg.det(a)
 print('the determinant of the given matrix : \n', det_a)
 
+#part 3:
 
-
-#part 3: flatten array in part 2
+#flatten array from part 2
 a_flat = a.flatten()
-print('the flattened array : \n', np.around(a_flat,2))
+print('the flattened array : \n', a_flat)
 
-#need square matrix, repeat first 3 elements 3 times
-a_flat_repeat = np.tile(a_flat[:3], 3)
-print('the flattened array repeated 3 times : \n', np.around(a_flat_repeat, 2))
+#tile a_flat * 9
+a_tile = np.tile(a_flat,9)
+print('the array tiled 9 times : \n', a_tile)
 
-#reshape into 2d matrix
-b = a_flat_repeat.reshape(3, -1) #square matrix
-print('the flattened array reshaped into 2d matrix : \n', np.around(b, 2))
+#reshape into square matrix
+a_reshaped = a_tile.reshape(len(a_flat), -1)
+print('the reshaped array in 2d matrix : \n', a_reshaped)
 
-# now finding the det of the new matrix
-det_b = np.linalg.det(b)
-print('the determinant of the new matrix : \n', np.around(det_b, 2))
+#take det
+det_a_reshaped = np.linalg.det(a_reshaped)
+print('the determinate of the reshaped array: \n', det_a_reshaped)
 
 
 
@@ -133,3 +134,4 @@ print('\nEvaluating the equations:')
 print(f'{8*a_values[0] + 6*a_values[1] - 10*a_values[2]:.2f} = 2')
 print(f'{-4*a_values[0] - 8*a_values[1] + 10*a_values[2]:.2f} = 5')
 print(f'{16*a_values[0] + 16*a_values[1]:.2f} = -3')
+
