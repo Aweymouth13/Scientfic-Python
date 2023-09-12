@@ -8,6 +8,10 @@ https://app.noteable.io/f/3f1af83b-486a-4122-9257-2dd002f52dd8/Week-3-Assignment
 
 #import libs
 import numpy as np
+import svd_image
+import matplotlib.pyplot as plt
+from matplotlib.image import imread
+
 
 
 #Exercise 1
@@ -135,3 +139,87 @@ print(f'{8*a_values[0] + 6*a_values[1] - 10*a_values[2]:.2f} = 2')
 print(f'{-4*a_values[0] - 8*a_values[1] + 10*a_values[2]:.2f} = 5')
 print(f'{16*a_values[0] + 16*a_values[1]:.2f} = -3')
 
+"""
+START OF HW 4
+
+"""
+print('start of homework 4')
+print('--' * 10)
+print('Exercise 4')
+
+A = np.array([[1,2,3],[4,5,6],[7,8,9]])
+det = np.linalg.det(A)
+if det == 0:
+    print("matrix can't be inverted, determinant is zero.")
+else:
+    print("matrix can be inverted.")
+
+#we know we can't invert the matrix directly bc the determinate is zero, singular matrix
+
+#svd
+U, S, VT = np.linalg.svd(A)
+print('U:\n', U)
+print('S:\n', S)
+print('V:\n', VT)
+
+#the max value of S is
+print('the max value of S is: ', np.max(S))
+
+#machine error ~1E-15
+rcond = S.max() * 1E-15 #arbitrary, near machine precision
+
+print('singular values', S)
+print('rcond', rcond)
+
+#actual v. effective rank
+actual_rank = np.linalg.matrix_rank(A)
+effective_rank = np.sum(S > rcond) # number of singular values larger than rcond
+
+print('actual rank', actual_rank)
+print('effective rank', effective_rank)
+
+#the actual and effective ranks are the same, if we want them different
+#we will need to choose a value that is larger than the second largest singular value
+
+
+
+#Exercise 5
+print('--' * 10)
+print('Exercise 5')
+
+#91x91 rand matrix, compute rank, recompute by SVD, truncate, recompose ...
+
+aaa=np.random.rand(91,91)
+print('the rank of the matrix is: ', np.linalg.matrix_rank(aaa))
+
+#svd
+U, S, VT = np.linalg.svd(aaa)
+
+#truncate terms in S rcond<1E-2
+rcond = 1e-2
+effective_rank = np.sum(S > rcond)
+
+#recompose
+S_trunc = np.diag(S[:effective_rank])
+U_trunc = U[:, :effective_rank]
+VT_trunc = VT[:effective_rank, :]
+aaa_recomposed = np.dot(U_trunc, np.dot(S_trunc, VT_trunc))
+
+print('the effective rank is: ', effective_rank)
+
+print('--' * 10)
+print('Exercise 6')
+"""
+#after reading function will automatically plot if plotme=True
+svd_image.denoise_image()
+#150 chosen by the slope of the curve plotted
+svd_image.denoise_image(k=150)
+
+"""
+
+
+#added custom functions to play with different variations of K
+#enter file name
+
+file_name = 'thephoto.jpg'
+svd_image.plot_reconstructed_images(file_name)
