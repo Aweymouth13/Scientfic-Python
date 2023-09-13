@@ -11,6 +11,7 @@ import numpy as np
 import svd_image
 import matplotlib.pyplot as plt
 from matplotlib.image import imread
+from sklearn.decomposition import PCA
 
 
 
@@ -214,8 +215,8 @@ print('Exercise 6')
 svd_image.denoise_image()
 #150 chosen by the slope of the curve plotted
 svd_image.denoise_image(k=150)
-
 """
+
 
 
 #added custom functions to play with different variations of K
@@ -223,3 +224,114 @@ svd_image.denoise_image(k=150)
 
 file_name = 'photo.jpeg'
 svd_image.plot_reconstructed_images(file_name)
+
+
+
+print('-' * 10)
+print('Exercise 7')
+
+#use linspace to create matrix, then eigendecomp
+
+#linspace
+matrix = np.linspace(40,60,9).reshape(3,3)
+
+#eigen decomp
+evects, evals = np.linalg.eig(matrix)
+
+#rank
+rank = np.linalg.matrix_rank(matrix)
+
+print('the eigenvalues are: ', evals)
+print('the eigenvectors are: ', evects)
+print('the rank of the matrix is: ', rank)
+
+#simplest way is to check if the matrix has a linear combonoation of another row
+#R3 is a scalar multiple of R1 therefore rank 2
+
+print('-' * 10)
+print('Exercise 8')
+
+#find patter and create matrix, reshape, eigenvectors, and eigenvalues, then confirm.
+
+#given array pattern start at 4^2 and end at 6^2 9 values for spacing
+z = np.linspace(16,36,9)
+print('the OG matrix is: ', z)
+
+#reshape into 3x3 matrix
+A = z.reshape(3,3)
+
+#eigenvectors and eigenvalues
+eigenvalues, eigenvectors = np.linalg.eig(A)
+
+#diag matrix using eigenvalues
+Lamb_duh = np.diag(eigenvalues)
+print('the diagonal matrix is: ', Lamb_duh)
+
+#reconstruction/confirm
+A_reconstructed = np.dot(eigenvectors, np.dot(Lamb_duh, np.linalg.inv(eigenvectors)))
+Lamb_duh_reconstructed = np.dot(np.linalg.inv(eigenvectors), np.dot(A, eigenvectors))
+
+#check if matricies are equal
+bool_equal_A = np.allclose(A, A_reconstructed)
+bool_equal_lamb_duh = np.allclose(Lamb_duh, Lamb_duh_reconstructed)
+
+print('the reconstructed matrix A is equal to the original matrix A: ', bool_equal_A)
+print('the reconstructed matrix Lambda is equal to the original matrix Lambda: ', bool_equal_lamb_duh)
+
+
+#will attempt unassigned exercise, if doesn't work will fix 
+#when assigned next week, do not understand pcademo3 function
+#will just plot w/ matplotlib
+
+print('-' * 10)
+print('Exercise 9: for funzies')
+
+#data from class
+rng = np.random.RandomState(1)
+X = np.dot(rng.rand(2, 2), rng.randn(2, 200)).T
+
+#pca with 2 components first
+pca = PCA(n_components=2)
+pca.fit(X)
+
+#principle comp
+components = pca.components_
+
+#mean
+mean = pca.mean_
+
+#plot w/ matplotlib
+plt.figure(figsize=(8, 6))
+plt.scatter(X[:, 0], X[:, 1], alpha=0.5)
+plt.quiver(mean[0], mean[1], components[0, 0], components[0, 1], angles='xy', scale_units='xy', scale=1, color='r')
+plt.quiver(mean[0], mean[1], components[1, 0], components[1, 1], angles='xy', scale_units='xy', scale=1, color='g')
+plt.axis('equal')
+plt.title('PCA with 2 Components')
+#plt.show()
+
+
+#PCA 1 comp
+pca_1 = PCA(n_components=1)
+pca_1.fit(X)
+
+#principle comp
+components_1 = pca_1.components_
+
+#mean
+mean_1 = pca_1.mean_
+
+#1D projection
+X_proj = pca_1.transform(X)
+
+#inverse back to OG space
+X_inv = pca_1.inverse_transform(X_proj)
+
+#plot w/ matplotlib
+plt.figure(figsize=(8, 6))
+plt.scatter(X[:, 0], X[:, 1], alpha=0.5, label='Original Data')
+plt.scatter(X_inv[:, 0], X_inv[:, 1], alpha=0.5, label='Projection onto 1st Principal Component')
+plt.quiver(mean_1[0], mean_1[1], components_1[0, 0], components_1[0, 1], angles='xy', scale_units='xy', scale=1, color='r')
+plt.axis('equal')
+plt.title('PCA with 1 Component')
+plt.legend()
+#plt.show()

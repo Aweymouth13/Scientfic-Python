@@ -1,23 +1,31 @@
 import numpy as np
+import matplotlib.pyplot as plt
+from sklearn.decomposition import PCA
 
-"""
-Consider the matrix ...
-np.array([[1,2,3],[4,5,6],[7,8,9]])
-What happens when you try to invert this matrix directly? Why? How could you have
-determined this outcome ahead of time?
-Use SVD to decompose this matrix. Based on the singular values, where should you
-truncate Σ (i.e. which rcond value)?
-Given Σ what is the "effective" rank of the (decomposed) matrix?
+# Create a dataset with one dominant component
+np.random.seed(0)
+data = np.random.randn(100, 2)
+data[:, 0] *= 3  # Amplify the first component
 
-"""
+# Fit PCA
+pca = PCA(n_components=2)
+pca.fit(data)
 
-#matrix
-A = np.array([[1,2,3],[4,5,6],[7,8,9]])
-#if we try to invert this matrix it won't work, det = 0
-print('singluar matrix bc det is:\n', np.linalg.det(A))
+# Transform the data
+transformed_data = pca.transform(data)
 
-#SVD
-U, S, V = np.linalg.svd(A)
-print('U:\n', U)
-print('S:\n', S)
-print('V:\n', V)
+# Plot the original and transformed data
+plt.subplot(1, 2, 1)
+plt.scatter(data[:, 0], data[:, 1])
+plt.title('Original Data')
+
+plt.subplot(1, 2, 2)
+plt.scatter(transformed_data[:, 0], transformed_data[:, 1])
+plt.title('Transformed Data (PCA)')
+
+plt.tight_layout()
+plt.show()
+
+# Print explained variance ratios
+explained_variance = pca.explained_variance_ratio_
+print("Explained Variance Ratios:", explained_variance)
