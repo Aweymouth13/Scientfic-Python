@@ -222,7 +222,7 @@ svd_image.denoise_image(k=150)
 #added custom functions to play with different variations of K
 #enter file name
 
-file_name = 'photo.jpeg'
+file_name = 'photo2.jpeg'
 svd_image.plot_reconstructed_images(file_name)
 
 
