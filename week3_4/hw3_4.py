@@ -210,12 +210,12 @@ print('the effective rank is: ', effective_rank)
 
 print('--' * 10)
 print('Exercise 6')
-"""
+
 #after reading function will automatically plot if plotme=True
 svd_image.denoise_image()
 #150 chosen by the slope of the curve plotted
 svd_image.denoise_image(k=150)
-"""
+
 
 
 
