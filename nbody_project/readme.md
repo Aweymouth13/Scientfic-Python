@@ -12,7 +12,8 @@
     - [write_csv](#write_csv)
 
 ## Description
-This Python script simulates the motion of `n` celestial bodies interacting under gravity. The script makes use of the Astropy library to obtain physical constants and Matplotlib for visualization. Data about the celestial bodies' states are also saved in a CSV file.
+This project simulates the motion of `n` celestial bodies interacting via gravity. We use Astropy to obtain physical constants, and Matplotlib for visulization. It saves each state of each frame to a csv file. We will further utilize a notebook style of python for data analysis.
+
 
 ## Dependencies
 - `numpy`
@@ -38,6 +39,14 @@ None
 ### `init_states`
 #### What it does:
 Initializes the initial states of the celestial bodies.
+
+#### How it works:
+1. **Positions (`pos`)**: Generates a 3D array for the positions of each body. It uses a Gaussian (normal) distribution. The center of this distribution is defined by `mean_pos`, and the spread or "width" of the distribution is defined by `std_pos`.
+
+2. **Velocities (`vel`)**: Similar to positions, it generates a 3D array for the velocities of each body. This also uses a Gaussian distribution centered around `mean_vel` with a standard deviation of `std_vel`.
+
+3. **Masses (`mass`)**: If `mean_mass` and `std_mass` are provided, the function will generate an array for the masses of each body. This array also follows a Gaussian distribution centered around `mean_mass` with a standard deviation of `std_mass`.
+
 
 #### Arguments:
 - `n`: Number of bodies
