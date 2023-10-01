@@ -4,11 +4,6 @@ import matplotlib.animation as animation
 from astropy import constants as const
 import csv
 
-# The init_constants function initializes and returns a set of fundamental constants
-# commonly used in astrophysical simulations. These include the gravitational constant (G),
-# the speed of light (c), the solar mass, and a predefined number of celestial bodies (n).
-# These constants are returned as a tuple for use in other parts of the program.
-
 """
 initializes and returns fundamental constants and number of bodies for the simulation.
 it uses astropy to retrieve the value of the gravitational constant, the speed of light,
