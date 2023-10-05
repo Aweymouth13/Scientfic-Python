@@ -12,11 +12,27 @@ def init_constants() -> Tuple[float, float, float, int]:
     n = 100
     return G, c, solar_mass, n
 
-def init_states(n: int, mean_pos: float, std_pos: float, mean_vel: float, std_vel: float, mean_mass: float = None, std_mass: float = None) -> Tuple[np.ndarray, np.ndarray, np.ndarray]:
+def init_states(n: int, mean_pos: float, std_pos: float, mean_vel: float, std_vel: float, alpha1=0.3, alpha2=1.3, alpha3=2.3, m0=1.989e28, m1=1.5912e29, m2=9.945e29, m3=2.386e32) -> Tuple[np.ndarray, np.ndarray, np.ndarray]:
     pos = np.random.normal(mean_pos, std_pos, (n, 3))
     vel = np.random.normal(mean_vel, std_vel, (n, 3))
-    mass = np.random.normal(mean_mass, std_mass, n) if mean_mass and std_mass else None
+
+    # Kroupa IMF in kg
+    masses = []
+    for _ in range(n):
+        x = np.random.uniform(0, 1)
+        if x < 0.3:
+            mass = (x / 0.3) ** (1 / alpha1) * m0
+        elif x < 0.5:
+            mass = ((x - 0.3) / 0.2) ** (1 / alpha2) * m1
+        else:
+            mass = ((x - 0.5) / 0.5) ** (1 / alpha3) * m2
+        masses.append(mass)  # Already in kg
+
+    mass = np.array(masses)
+
     return pos, vel, mass
+
+
 
 def normalize_mass(mass: np.ndarray) -> np.ndarray:
     return (mass - np.min(mass)) / (np.max(mass) - np.min(mass))
@@ -64,7 +80,7 @@ def write_csv(csv_data: List[List], csvfile) -> None:
 
 if __name__ == '__main__':
     G, c, solar_mass, n = init_constants()
-    pos, vel, mass = init_states(n, mean_pos=5 * const.au.value, std_pos=1 * const.au.value, mean_vel=250000, std_vel=50000, mean_mass=solar_mass, std_mass=0.1 * solar_mass)
+    pos, vel, mass = init_states(n, mean_pos=5 * const.au.value, std_pos=1 * const.au.value, mean_vel=250000, std_vel=50000)
     dt = 10000
     csv_data = []
 
@@ -75,3 +91,5 @@ if __name__ == '__main__':
 
     with open('data_output/data.csv', 'w', newline='') as csvfile:
         write_csv(csv_data, csvfile)
+
+
