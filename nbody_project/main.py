@@ -111,7 +111,7 @@ the first row is written with headers ['unique_id', 'mass', 'x_pos', 'y_pos', 'z
 then, writes each row from csv_data into the csv file.
 """
 def write_csv(csv_data):
-    with open('data_output/data.csv', 'w', newline='') as csvfile:
+    with open('data.csv', 'w', newline='') as csvfile:
         csv_writer = csv.writer(csvfile)
         csv_writer.writerow(['unique_id', 'mass', 'x_pos', 'y_pos', 'z_pos', 'vel_x', 'vel_y', 'vel_z', 'frame', 'dt'])
         csv_writer.writerows(csv_data)
@@ -134,7 +134,7 @@ if __name__ == '__main__':
     csv_data = []
 
     fig, ax, sc = init_plot(pos, mass)
-    ani = animation.FuncAnimation(fig, update, fargs=(ax, sc, pos, vel, mass, dt, csv_data, G), frames=1000, interval=50)
+    ani = animation.FuncAnimation(fig, update, fargs=(ax, sc, pos, vel, mass, dt, csv_data, G), frames=100, interval=50)
 
     plt.show()
     write_csv(csv_data)
