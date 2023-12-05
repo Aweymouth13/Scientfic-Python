@@ -9,7 +9,7 @@ def init_constants() -> Tuple[float, float, float, int]:
     G = const.G.value
     c = const.c.value
     solar_mass = const.M_sun.value
-    n = 3
+    n = 100
     return G, c, solar_mass, n
 
 def init_states(n: int, mean_pos: float, std_pos: float, mean_vel: float, std_vel: float, alpha1=0.3, alpha2=1.3, alpha3=2.3, m0=1.989e28, m1=1.5912e29, m2=9.945e29, m3=2.386e32) -> Tuple[np.ndarray, np.ndarray, np.ndarray]:
@@ -91,5 +91,3 @@ if __name__ == '__main__':
 
     with open('data_output/data.csv', 'w', newline='') as csvfile:
         write_csv(csv_data, csvfile)
-
-
