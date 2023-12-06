@@ -20,7 +20,7 @@ def init_constants() -> Tuple[float, float, float, int]:
     G = const.G.value
     c = const.c.value
     solar_mass = const.M_sun.value
-    n = 20
+    n = 100
     return G, c, solar_mass, n
 
 
