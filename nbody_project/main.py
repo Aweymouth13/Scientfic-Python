@@ -200,7 +200,6 @@ if __name__ == '__main__':
 
     fig, ax, sc = init_plot(pos, mass)
     ani = animation.FuncAnimation(fig, update, fargs=(ax, sc, pos, vel, mass, dt, csv_data, G), frames=100000, interval=50)
-
     plt.show()
     
 
