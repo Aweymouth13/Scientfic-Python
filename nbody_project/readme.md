@@ -1,107 +1,31 @@
 
 # N-Body Simulation with Astropy and Matplotlib
 
-## Table of Contents
-- [Description](#description)
-- [Dependencies](#dependencies)
-- [Functions](#functions)
-    - [init_constants](#init_constants)
-    - [init_states](#init_states)
-    - [init_plot](#init_plot)
-    - [update](#update)
-    - [write_csv](#write_csv)
+## 1. A brief Summary Summar of our project and why we are doing it
+- This project invloves creating a python simulation of 'celestial bodies' under gravitational influences visualised and logged to a csv.
+- The purpose was to demonstrate the dynamics of celestial/astronomical systems.
+- This project shows the heavy overlap between physics, data analysis, and visualization in a computational setting.
+- We have no doubt there are a many better (and more accruate) simulations readily avaliable to the public however, this really let us test our knowledge of some very important libraries (numpy, astropy et. al.) and how they can interact to futher the scientific body of knowledge.
 
-## Description
-This project simulates the motion of `n` celestial bodies interacting via gravity. We use Astropy to obtain physical constants, and Matplotlib for visulization. It saves each state of each frame to a csv file. We will further utilize a notebook style of python for data analysis.
+## 2. A list of python packages used in our project
+- Default/Standard Libraries: csv, typing
+- Numpy
+- Matplotlib (pyplot and ani)
+- Astropy
 
+## 3. Source code for any packages written
+- Self contained code in `main.py`
+- You will find all functions defined with docstrings at the top, and a main call at the bottom.
 
-## Dependencies
-- `numpy`
-- `matplotlib`
-- `astropy`
-- `csv`
-
-## Functions
-
-### `init_constants`
-#### What it does:
-Initializes physical constants like the gravitational constant `G`, speed of light `c`, solar mass `solar_mass`, and the number of bodies `n`.
-
-#### Arguments:
-None
-
-#### Returns:
-- `G`: Gravitational constant in \( m^3 / (kg \cdot s^2) \)
-- `c`: Speed of light in \( m/s \)
-- `solar_mass`: Solar mass in \( kg \)
-- `n`: Number of bodies
-
-### `init_states`
-#### What it does:
-Initializes the initial states of the celestial bodies.
-
-#### How it works:
-1. **Positions (`pos`)**: Generates a 3D array for the positions of each body. It uses a Gaussian (normal) distribution. The center of this distribution is defined by `mean_pos`, and the spread or "width" of the distribution is defined by `std_pos`.
-
-2. **Velocities (`vel`)**: Similar to positions, it generates a 3D array for the velocities of each body. This also uses a Gaussian distribution centered around `mean_vel` with a standard deviation of `std_vel`.
-
-3. **Masses (`mass`)**: If `mean_mass` and `std_mass` are provided, the function will generate an array for the masses of each body. This array also follows a Gaussian distribution centered around `mean_mass` with a standard deviation of `std_mass`.
+## 4. A written Presentation of our results:
 
 
-#### Arguments:
-- `n`: Number of bodies
-- `mean_pos`: Mean position in 3D space
-- `std_pos`: Standard deviation of position
-- `mean_vel`: Mean velocity
-- `std_vel`: Standard deviation of velocity
-- `mean_mass`: Mean mass (optional)
-- `std_mass`: Standard deviation of mass (optional)
+## 5. Clear Instructions on how to run the code:
+- Ensure main.py is in a python environment with the given packages avaliable (Astropy, Matplotlib, Numpy)
+- This will not run sucessfully in an ipython env as the animation will not display, please use default python or an ide.
+- The 3D matplotlib SC should appear and run course, it will also save a file called `data.csv` to the directory folder where it is being ran.
 
-#### Returns:
-- `pos`: Array of positions
-- `vel`: Array of velocities
-- `mass`: Array of masses
 
-### `init_plot`
-#### What it does:
-Initializes the 3D plot for visualization.
 
-#### Arguments:
-- `pos`: Array of positions
-- `mass`: Array of masses
 
-#### Returns:
-- `fig`: Figure object
-- `ax`: Axis object
-- `sc`: Scatter plot object
-
-### `update`
-#### What it does:
-Updates the plot and the states of the celestial bodies at each frame.
-
-#### Arguments:
-- `frame`: Current frame number
-- `ax`: Axis object
-- `sc`: Scatter plot object
-- `pos`: Array of positions
-- `vel`: Array of velocities
-- `mass`: Array of masses
-- `dt`: Time step
-- `csv_data`: List to store data for CSV
-- `G`: Gravitational constant
-
-#### Returns:
-- `sc`: Updated scatter plot object
-
-### `write_csv`
-#### What it does:
-Writes the states of the celestial bodies into a CSV file.
-
-#### Arguments:
-- `csv_data`: List containing data to be written
-
-#### Returns:
-None
-
-## Running the Script
-Just run the script. Make sure to have all the dependencies installed.
+1. A written presentation of results of your coding project (a brief narrative, accompanying plots/animations/etc) and a very brief discussion of the implications
